@@ -1,5 +1,7 @@
 package com.senac.rolealeatorio.model;
 
+import android.text.TextUtils;
+
 import java.util.Date;
 
 public class Usuario {
@@ -56,6 +58,18 @@ public class Usuario {
 
     public void setCPF(String CPF) {
         this.CPF = CPF;
+    }
+
+    public boolean isCPFNullOrEmpty(){
+        return (CPF == null || CPF.isEmpty());
+    }
+
+    public boolean isSenhaNullOrEmpty(){
+        return (senha == null || senha.isEmpty());
+    }
+
+    public boolean isEmailNullOrEmpty(){
+        return (email == null || email.isEmpty());
     }
 
     //Alt + Insert

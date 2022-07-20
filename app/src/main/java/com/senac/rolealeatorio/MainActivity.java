@@ -2,11 +2,13 @@ package com.senac.rolealeatorio;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.senac.rolealeatorio.dao.UsuarioDAO;
 import com.senac.rolealeatorio.model.Usuario;
@@ -40,9 +42,19 @@ public class MainActivity extends AppCompatActivity {
                 usuario.setSenha(editTextSenha.getText().toString());
                 usuario.setCPF(editTextCPF.getText().toString());
 
-                UsuarioDAO dao = new UsuarioDAO(MainActivity.this, "roleAleatorio", null, 1);
+                if (usuario.isCPFNullOrEmpty() || usuario.isEmailNullOrEmpty() || usuario.isSenhaNullOrEmpty()) {
+                    Toast.makeText(MainActivity.this, "CPF, Email e senha são obrigatórios", Toast.LENGTH_LONG).show();
+                } else {
+                    UsuarioDAO dao = new UsuarioDAO(MainActivity.this, "roleAleatorio", null, 1);
 
-                dao.salva(usuario);
+                    dao.salva(usuario);
+
+                    Intent intencao = new Intent(MainActivity.this, LoginActivity.class);
+                    startActivity(intencao);
+
+                    Toast.makeText(MainActivity.this, "Sucesso", Toast.LENGTH_LONG).show();
+
+                }
             }
         });
 
